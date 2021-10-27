@@ -48,3 +48,13 @@ export class MajorArchana {
 }
 
 export type Card = MajorArchana | MinorArchana;
+
+export let show = (c: Card): string => {
+  if (c instanceof MajorArchana) {
+    return c.title;
+  }
+  if (c instanceof MinorArchana) {
+    return c.value.toString() + " of " + c.suit.toString();
+  }
+  return "";
+};
