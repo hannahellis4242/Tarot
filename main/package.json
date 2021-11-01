@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/electron": "^1.6.10",
     "@types/node": "^16.11.6",
     "@types/seedrandom": "^3.0.1",
     "nodemon": "^2.0.14",
