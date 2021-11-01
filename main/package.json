@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron dist/main.js",
+    "watch": "nodemon --exec npx electron dist/main.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/electron": "^1.6.10",
     "@types/node": "^16.11.6",
     "@types/seedrandom": "^3.0.1",
+    "nodemon": "^2.0.14",
     "typescript": "^4.4.4"
   },
   "dependencies": {
+    "electron": "^15.3.0",
     "random": "^3.0.6",
     "seedrandom": "^3.0.5"
   }
