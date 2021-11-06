@@ -1,4 +1,4 @@
-import { createDeck, shuffle } from "./data";
+/*import { createDeck, shuffle } from "./data";
 import { toCard } from "./utils";
 import random from "random";
 import seedrandom from "seedrandom";
@@ -22,4 +22,4 @@ const result = populate(
   ],
   deck
 );
-console.log(JSON.stringify(result, undefined, 4));
+console.log(JSON.stringify(result, undefined, 4));*/
