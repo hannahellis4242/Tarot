@@ -1,53 +1,31 @@
 import express from "express";
 import axios, { AxiosResponse } from "axios";
+import { RequestBody, ResponseBody } from "./interfaces";
+import path from "path";
 
 const port = 8000;
 const app = express();
 
-interface RequestBody {
-  seed: string;
-}
+app.use(express.static(path.join(__dirname, "..", "public")));
 
-interface index {
-  num: number;
-  reversed: boolean;
-}
-
-interface ResponceBodySuccess {
-  seed: string;
-  time: number;
-  deck: index[];
-}
-
-interface ResponceBodyError {
-  time: number;
-  err: string;
-}
-
-type ResponceBody = ResponceBodySuccess | ResponceBodyError;
-
-app.get("/", (req, res) => {
-  /*res.send("Hello World!");*/
-  console.log("here");
+app.get("/deck", (req, res) => {
   axios
-    .get<RequestBody, AxiosResponse<ResponceBody>, RequestBody>(
+    .get<RequestBody, AxiosResponse<ResponseBody>, RequestBody>(
       "http://localhost:5000/deck",
       {
         data: { seed: "Hello world" },
       }
     )
     .then((value) => {
-      console.log(JSON.stringify(value.data));
       if ("err" in value.data) {
         console.log("error :", value.data.err);
         res.status(200).send("Error");
       } else {
-        console.log("result : ", JSON.stringify(value.data));
-        res.status(200).send(JSON.stringify(value.data.deck));
+        res.status(200).json(value.data);
       }
     })
     .catch((reason) => {
-      console.log("catch : ");
+      console.log("catch : ", reason);
       res.status(200).send(JSON.stringify(reason));
     });
 });
