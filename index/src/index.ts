@@ -11,7 +11,7 @@ const main = document.createElement("main");
   start.classList.add("centre");
   start.textContent = "Start";
   start.addEventListener("click", (e) => {
-    location.href = "/start";
+    location.href = "/start.html";
   });
   main.appendChild(start);
 }

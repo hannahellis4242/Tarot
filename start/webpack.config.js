@@ -1,9 +1,9 @@
 const path = require("path");
 module.exports = {
   target: "node",
-  entry: "./src/index.ts",
+  entry: "./src/start.ts",
   output: {
-    filename: "index.js",
+    filename: "start.js",
     path: path.resolve(__dirname, "../main/public/scripts"),
   },
   devtool: "inline-source-map",
