@@ -19,7 +19,7 @@ const main = document.createElement("main");
   const img = document.createElementNS(ns, "image");
   img.setAttributeNS(null, "href", "cards/0.svg");
   img.setAttributeNS(null, "width", "50");
-  img.setAttributeNS(null, "transform", "translate(100,5) rotate(90)");
+  img.setAttributeNS(null, "transform", "translate(100,5) rotate(450)");
   svg.appendChild(img);
   div.appendChild(svg);
   main.appendChild(div);

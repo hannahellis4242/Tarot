@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 app.get("/deck", (req, res) => {
   axios
     .get<RequestBody, AxiosResponse<ResponseBody>, RequestBody>(
-      "http://localhost:5000/deck",
+      "http://localhost:5000",
       {
         data: { seed: "Hello world" },
       }
