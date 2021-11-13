@@ -5,13 +5,17 @@ import { createDeck, index, shuffle } from "./deck";
 
 interface RequestBody {
   seed: string;
+  draw?: number;
 }
 class ResponceBodySuccess {
   time: number;
   deck: index[];
-  constructor(public seed: string) {
+  constructor(public seed: string, draw?: number) {
     this.time = Date.now();
     this.deck = shuffle(createDeck(), random.clone(seedrandom(seed)));
+    if (draw) {
+      this.deck = this.deck.slice(0, draw);
+    }
   }
 }
 
