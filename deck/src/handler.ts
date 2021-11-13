@@ -30,7 +30,7 @@ type ResponceBody = ResponceBodySuccess | ResponceBodyError;
 
 const createResponceBody = (body: RequestBody | object): ResponceBody => {
   if ("seed" in body) {
-    return new ResponceBodySuccess(body.seed);
+    return new ResponceBodySuccess(body.seed, body.draw);
   } else {
     return new ResponceBodyError("no seed");
   }
