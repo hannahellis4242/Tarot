@@ -10,22 +10,28 @@ class Position {
     public order: number,
     public x: number,
     public y: number,
-    public orient: Orientation,
-    public card?: Index
+    public orient: Orientation
+  ) {}
+}
+
+class Card {
+  constructor(
+    public index: Index,
+    public position: Position,
+    public shown: boolean
   ) {}
 }
 
 class Spread {
-  constructor(public deck: Index[], public positions: Position[]) {}
+  constructor(public cards: Card[]) {}
 
-  /*successor(): Spread {
-    const newDeck = this.deck;
-    const card = newDeck.pop();
-    if (card) {
-      const newPositions = this.positions.reduce((acc, x) => {
-        acc.peak;
-      }, []);
-    }
+  successor(): Spread {
+    //TODO
     return this;
-  }*/
+  }
+
+  predecessor(): Spread {
+    //TODO
+    return this;
+  }
 }
