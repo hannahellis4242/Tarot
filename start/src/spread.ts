@@ -15,23 +15,29 @@ class Position {
 }
 
 class Card {
-  constructor(
-    public index: Index,
-    public position: Position,
-    public shown: boolean
-  ) {}
+  constructor(public index: Index, public position: Position) {}
+  build() {
+    //TODO this method will return an svg tree
+  }
 }
 
 class Spread {
-  constructor(public cards: Card[]) {}
+  constructor(public cards: Card[], public numberToShow: number) {}
 
   successor(): Spread {
-    //TODO
-    return this;
+    const newNumber = this.numberToShow + 1;
+    return new Spread(
+      this.cards,
+      newNumber > this.cards.length ? this.cards.length : newNumber
+    );
   }
 
   predecessor(): Spread {
-    //TODO
-    return this;
+    const newNumber = this.numberToShow - 1;
+    return new Spread(this.cards, newNumber < 0 ? 0 : newNumber);
+  }
+
+  build() {
+    //TODO this method will return an svg tree
   }
 }
