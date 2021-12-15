@@ -15,23 +15,24 @@ class Position {
 }
 
 class Card {
-  constructor(
-    public index: Index,
-    public position: Position,
-    public shown: boolean
-  ) {}
+  constructor(public index: Index, public position: Position) {}
 }
 
 class Spread {
-  constructor(public cards: Card[]) {}
-
-  successor(): Spread {
-    //TODO
-    return this;
+  constructor(public hiden: Card[], public shown: Card[] = []) {}
+  successor(): Spread | null {
+    const [head, ...tail] = this.hiden;
+    if (head) {
+      return new Spread(tail, [...this.shown, head]);
+    }
+    return null;
   }
 
-  predecessor(): Spread {
-    //TODO
-    return this;
+  predecessor(): Spread | null {
+    const [end, ...init] = [...this.shown].reverse();
+    if (end) {
+      return new Spread([end, ...this.hiden], init.reverse());
+    }
+    return null;
   }
 }
