@@ -30,10 +30,10 @@ export class Card {
       img.setAttributeNS(
         null,
         "href",
-        "cards/" + this.index.num.toString() + ".svg"
+        "cards/" + this.index.num.toString() + ".jpg" //".svg"
       );
     } else {
-      img.setAttributeNS(null, "href", "cards/blank.svg");
+      img.setAttributeNS(null, "href", "cards/blank.jpg"); //.svg");
     }
     img.setAttributeNS(null, "width", i.width.toString());
     //ORENT todo
@@ -66,7 +66,7 @@ export default class Spread {
       acc.appendChild(card.build({ width: 50, show: true }));
       return acc;
     }, document.createElementNS(ns, "svg"));
-    svg = this.shown.reduce<SVGElement>((acc, card) => {
+    svg = this.hiden.reduce<SVGElement>((acc, card) => {
       acc.appendChild(card.build({ width: 50, show: false }));
       return acc;
     }, svg);

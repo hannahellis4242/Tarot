@@ -56,7 +56,7 @@ const positions = [
 ];
 
 const cards = zip(response.deck, positions).map((x) => new Card(x[0], x[1]));
-
+console.log(cards);
 const spread = new Spread(cards);
 
 const main = document.createElement("main");
