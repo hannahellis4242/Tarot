@@ -5,7 +5,7 @@ class Index {
 type Compass = "North" | "West" | "South" | "East";
 type Orientation = number | Compass;
 
-class Position {
+export class Position {
   constructor(
     public title: string,
     public order: number,
@@ -15,16 +15,18 @@ class Position {
   ) {}
 }
 
-class Card {
+interface Instructions {
+  width: number;
+  show: boolean;
+  height?: number;
+}
+
+export class Card {
   constructor(public index: Index, public position: Position) {}
-  build(
-    width: number,
-    show: boolean = true,
-    height: number | null = null
-  ): SVGElement {
+  build(i: Instructions): SVGElement {
     const ns = "http://www.w3.org/2000/svg";
     const img = document.createElementNS(ns, "image");
-    if (show) {
+    if (i.show) {
       img.setAttributeNS(
         null,
         "href",
@@ -33,14 +35,14 @@ class Card {
     } else {
       img.setAttributeNS(null, "href", "cards/blank.svg");
     }
-    img.setAttributeNS(null, "width", width.toString());
+    img.setAttributeNS(null, "width", i.width.toString());
     //ORENT todo
     img.setAttributeNS(null, "transform", "translate(100,5) rotate(450)");
     return img;
   }
 }
 
-class Spread {
+export default class Spread {
   constructor(public hiden: Card[], public shown: Card[] = []) {}
   successor(): Spread | null {
     const [head, ...tail] = this.hiden;
@@ -61,11 +63,11 @@ class Spread {
   build(): SVGElement {
     const ns = "http://www.w3.org/2000/svg";
     let svg = this.shown.reduce<SVGElement>((acc, card) => {
-      acc.appendChild(card.build(50));
+      acc.appendChild(card.build({ width: 50, show: true }));
       return acc;
     }, document.createElementNS(ns, "svg"));
     svg = this.shown.reduce<SVGElement>((acc, card) => {
-      acc.appendChild(card.build(50, false));
+      acc.appendChild(card.build({ width: 50, show: false }));
       return acc;
     }, svg);
     //svg.setAttributeNS(null, "width", "100%");
