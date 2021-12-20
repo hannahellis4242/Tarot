@@ -1,5 +1,6 @@
 import { zip } from "rambda";
 import Spread, { Position, Card } from "./spread";
+import { clearElement } from "./util";
 
 //for now do a hard coded response
 const response = {
@@ -56,20 +57,62 @@ const positions = [
 ];
 
 const cards = zip(response.deck, positions).map((x) => new Card(x[0], x[1]));
-console.log(cards);
-const spread = new Spread(cards);
+
+let spread = new Spread(cards);
+let prev = spread.predecessor();
+let next = spread.successor();
 
 const main = document.createElement("main");
 {
-  const form = document.createElement("form") as HTMLFormElement;
-  {
-  }
   const img = document.createElement("section");
   {
     const svg = spread.build();
     img.appendChild(svg);
   }
-  main.appendChild(form);
+  const form = document.createElement("form") as HTMLFormElement;
+  {
+    {
+      const button = document.createElement("button");
+      button.innerText = "<- previous";
+      if (prev) {
+        button.classList.add("enabled");
+        button.addEventListener("click", (ev) => {
+          ev.preventDefault();
+          clearElement(img);
+          next = spread;
+          spread = prev as Spread;
+          prev = spread.predecessor();
+          const svg = spread.build();
+          img.appendChild(svg);
+        });
+      } else {
+        button.classList.add("disabled");
+      }
+      form.appendChild(button);
+    }
+    {
+      {
+        const button = document.createElement("button");
+        button.innerText = "next ->";
+        if (next) {
+          button.classList.add("enabled");
+          button.addEventListener("click", (ev) => {
+            ev.preventDefault();
+            clearElement(img);
+            prev = spread;
+            spread = next as Spread;
+            next = spread.successor();
+            const svg = spread.build();
+            img.appendChild(svg);
+          });
+        } else {
+          button.classList.add("disabled");
+        }
+        form.appendChild(button);
+      }
+    }
+  }
   main.appendChild(img);
+  main.appendChild(form);
 }
 document.body.appendChild(main);
