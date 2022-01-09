@@ -1,0 +1,1 @@
+node deck/dist/main.js & node word/dist/main.js & node main/dist/main.js

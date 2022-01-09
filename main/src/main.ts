@@ -4,14 +4,38 @@ import { RequestBody, ResponseBody } from "./interfaces";
 import path from "path";
 
 const port = 8000;
+const deckPort = 5000;
+const wordPort = 5001;
 const app = express();
 
 app.use(express.static(path.join(__dirname, "..", "public")));
 
-app.get("/deck", (req, res) => {
+app.get("/deck/:seed", (req, res) => {
   axios
     .get<RequestBody, AxiosResponse<ResponseBody>, RequestBody>(
-      "http://localhost:5000",
+      "http://localhost:" + deckPort.toString(),
+      {
+        data: { seed: req.params.seed },
+      }
+    )
+    .then((value) => {
+      if ("err" in value.data) {
+        console.log("error :", value.data.err);
+        res.status(200).send("Error");
+      } else {
+        res.status(200).json(value.data);
+      }
+    })
+    .catch((reason) => {
+      console.log("catch : ", reason);
+      res.status(200).send(JSON.stringify(reason));
+    });
+});
+
+app.get("/word", (req, res) => {
+  axios
+    .get<RequestBody, AxiosResponse<ResponseBody>, RequestBody>(
+      "http://localhost:" + wordPort.toString(),
       {
         data: { seed: "Hello world" },
       }
