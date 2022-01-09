@@ -14,5 +14,8 @@
     "typescript": "^4.4.4",
     "webpack": "^5.62.1",
     "webpack-cli": "^4.9.1"
+  },
+  "dependencies": {
+    "rambda": "^7.0.1"
   }
 }

@@ -1,6 +1,7 @@
 import Context from "./Context";
 import IState from "./IState";
 import MainState from "./MainState";
+import TarotState from "./TarotState";
 
 export default class StartState implements IState {
   constructor(private context: Context) {}
@@ -29,6 +30,16 @@ export default class StartState implements IState {
       start.textContent = "Use Seed";
       start.addEventListener("click", (e) => {
         this.context.changeState(new MainState(this.context));
+      });
+      main.appendChild(start);
+    }
+    {
+      const start = document.createElement("span") as HTMLSpanElement;
+      start.classList.add("button");
+      start.classList.add("centre");
+      start.textContent = "Temp_dev";
+      start.addEventListener("click", (e) => {
+        this.context.changeState(new TarotState(this.context));
       });
       main.appendChild(start);
     }
