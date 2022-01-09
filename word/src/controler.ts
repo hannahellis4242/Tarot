@@ -12,7 +12,7 @@ export const addWord: RequestHandler = (req, res) => {
     addWordDirect(word);
     res.status(201).json({ message: "Added word", word });
   } else {
-    res.status(500).json({ err: true, message: "no word to add" });
+    res.status(400).json({ err: true, message: "no word to add" });
   }
 };
 
@@ -20,10 +20,14 @@ export const getWord: RequestHandler = (req, res) => {
   if ("index" in req.body) {
     const { index } = req.body as { index: number };
     if (index >= 0 && index < words.length) {
-      res.status(201).json({ word: words[index] });
+      res.status(200).json({ word: words[index] });
     } else {
-      res.status(500).json({ err: true, message: "out of range" });
+      res
+        .status(400)
+        .json({ err: true, message: "out of range", max: words.length });
     }
+  } else {
+    res.status(400).json({ err: true, message: "no index requested" });
   }
 };
 
@@ -31,8 +35,8 @@ export const removeWord: RequestHandler = (req, res) => {
   if ("word" in req.body) {
     const { word } = req.body as { word: string };
     words = words.filter((value) => value !== word);
-    res.status(201).json({ mesage: "removed", word });
+    res.status(200).json({ mesage: "removed", word });
   } else {
-    res.status(500).json({ err: true, message: "no word given to remove" });
+    res.status(400).json({ err: true, message: "no word given to remove" });
   }
 };
