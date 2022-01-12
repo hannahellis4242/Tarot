@@ -58,6 +58,10 @@ app.get("/words", (req, res) => {
     });
 });
 
+app.get("/tarot/:seed", (req, res) => {
+  res.status(200).json(req.params);
+});
+
 app.listen(port, "localhost", () => {
   console.log(`listening at http://localhost:${port}`);
 });
