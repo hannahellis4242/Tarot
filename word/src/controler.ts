@@ -1,4 +1,5 @@
 import { RequestHandler } from "express";
+import random, { Random } from "random";
 
 let words: string[] = [];
 
@@ -38,5 +39,40 @@ export const removeWord: RequestHandler = (req, res) => {
     res.status(200).json({ mesage: "removed", word });
   } else {
     res.status(400).json({ err: true, message: "no word given to remove" });
+  }
+};
+const min = <T>(a: T, b: T): T => {
+  return a < b ? a : b;
+};
+const shuffleN = <T>(xs: T[], n: number, rng: Random): T[] => {
+  const max = xs.length - 1;
+  const stop = min(max, n);
+  for (var i = 0; i < stop; ++i) {
+    const j = rng.int(i, max);
+    const temp = xs[i];
+    xs[i] = xs[j];
+    xs[j] = temp;
+  }
+  return xs;
+};
+
+export const getRandom: RequestHandler = (req, res) => {
+  if ("number" in req.body) {
+    const { number } = req.body as { number: number };
+    if (number >= 0 && number < words.length) {
+      const wordBucket = [...words];
+      res.status(200).json({
+        words: shuffleN(wordBucket, number, random).slice(0, number).sort(),
+      });
+    } else {
+      res
+        .status(400)
+        .json({ err: true, message: "out of range", max: words.length });
+    }
+  } else {
+    res.status(400).json({
+      err: true,
+      message: "please spesify how many random words you require",
+    });
   }
 };

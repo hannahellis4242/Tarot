@@ -3,6 +3,7 @@ import router from "./handler";
 import readLine from "readline";
 import { createReadStream } from "fs";
 import { addWordDirect } from "./controler";
+import randomRouter from "./RandomHandler";
 
 const reader = readLine.createInterface(
   createReadStream("uniqueFilteredWordList.txt")
@@ -22,6 +23,7 @@ const port = getPort(5001);
 const app = express();
 app.use(express.json());
 app.use("/", router);
+app.use("/random", randomRouter);
 
 app.listen(port, "localhost", () => {
   console.log(`listening at http://localhost:${port}`);
