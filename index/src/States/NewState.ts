@@ -3,45 +3,43 @@ import Context from "./Context";
 import IState from "./IState";
 import StartState from "./StartState";
 
-interface Responce{
-  words?:string[];
-  err?:string;
+interface Responce {
+  words?: string[];
+  err?: string;
 }
-const buildWordList = (element:HTMLElement){
-axios
-  .get<void, AxiosResponse<Responce>, Responce>(
-    "http://localhost:8000/word"
-  )
-  .then((value) => {
-    if ("err" in value.data) {
-      console.log("error :", value.data.err);
-    } else if("words" in value.data){
-      const {words} = value.data as {words:string[]}
-      const form = document.createElement("form") as HTMLFormElement;
-      words.forEach((word)=>{
-        {const input = document.createElement("input") as HTMLInputElement;
-        input.type="checkbox";
-        input.id = word;
-        input.value = word;
-        form.appendChild(input);
+const buildWordList = (element: HTMLElement) => {
+  axios
+    .get<void, AxiosResponse<Responce>, Responce>("http://localhost:8000/word")
+    .then((value) => {
+      if ("err" in value.data) {
+        console.log("error :", value.data.err);
+      } else if ("words" in value.data) {
+        const { words } = value.data as { words: string[] };
+        const form = document.createElement("form") as HTMLFormElement;
+        words.forEach((word) => {
+          {
+            const input = document.createElement("input") as HTMLInputElement;
+            input.type = "checkbox";
+            input.id = word;
+            input.value = word;
+            form.appendChild(input);
+          }
+          {
+            const label = document.createElement("label") as HTMLLabelElement;
+            label.htmlFor = word;
+            label.innerHTML = word;
+            form.appendChild(label);
+          }
+        });
+        element.appendChild(form);
+      } else {
+        console.log("Unknown error : ", JSON.stringify(value.data));
       }
-      {
-        const label = document.createElement("label") as HTMLLabelElement;
-        label.htmlFor = word;
-        label.innerHTML = word;
-        form.appendChild(label);
-      }
-      });
-      element.appendChild(form);
-    }
-    else{
-      console.log("Unknown error : ", JSON.stringify(value.data));
-    }
-  })
-  .catch((reason) => {
-    console.log("catch : ", reason);
-  });
-}
+    })
+    .catch((reason) => {
+      console.log("catch : ", reason);
+    });
+};
 
 export default class NewState implements IState {
   constructor(private context: Context) {}
