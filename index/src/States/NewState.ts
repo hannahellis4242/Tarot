@@ -9,7 +9,7 @@ interface Responce {
 }
 const buildWordList = (element: HTMLElement) => {
   axios
-    .get<void, AxiosResponse<Responce>, Responce>("http://localhost:8000/word")
+    .get<void, AxiosResponse<Responce>, Responce>("http://localhost:8000/words")
     .then((value) => {
       if ("err" in value.data) {
         console.log("error :", value.data.err);
@@ -54,6 +54,7 @@ export default class NewState implements IState {
     {
       const section = document.createElement("section");
       buildWordList(section);
+      main.appendChild(section);
     }
     document.body.appendChild(main);
   }

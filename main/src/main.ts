@@ -39,7 +39,7 @@ app.get("/deck/:seed", (req, res) => {
 app.get("/words", (req, res) => {
   axios
     .get<WordRequestBody, AxiosResponse<DeckResponseBody>, WordRequestBody>(
-      "http://localhost:" + wordPort.toString(),
+      "http://localhost:" + wordPort.toString() + "/random",
       {
         data: { num: 100 },
       }
