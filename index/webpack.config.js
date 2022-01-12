@@ -1,11 +1,16 @@
 const path = require("path");
 module.exports = {
   target: "node",
-  entry: "./src/index.ts",
+  mode: "development",
+  entry: {
+    index: "./src/index.ts",
+    check: "./src/check.ts",
+  },
   output: {
-    filename: "index.js",
+    filename: "[name].js",
     path: path.resolve(__dirname, "../main/public/scripts"),
   },
+  //optimization: { runtimeChunk: "single" },
   devtool: "inline-source-map",
   module: {
     rules: [
