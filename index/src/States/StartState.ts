@@ -1,6 +1,7 @@
 import Context from "./Context";
 import IState from "./IState";
 import MainState from "./MainState";
+import NewState from "./NewState";
 import TarotState from "./TarotState";
 
 export default class StartState implements IState {
@@ -19,7 +20,7 @@ export default class StartState implements IState {
       start.classList.add("centre");
       start.textContent = "New";
       start.addEventListener("click", (e) => {
-        this.context.changeState(new MainState(this.context));
+        this.context.changeState(new NewState(this.context));
       });
       main.appendChild(start);
     }

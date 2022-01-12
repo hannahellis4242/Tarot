@@ -57,12 +57,12 @@ const shuffleN = <T>(xs: T[], n: number, rng: Random): T[] => {
 };
 
 export const getRandom: RequestHandler = (req, res) => {
-  if ("number" in req.body) {
-    const { number } = req.body as { number: number };
-    if (number >= 0 && number < words.length) {
+  if ("num" in req.body) {
+    const { num } = req.body as { num: number };
+    if (num >= 0 && num < words.length) {
       const wordBucket = [...words];
       res.status(200).json({
-        words: shuffleN(wordBucket, number, random).slice(0, number).sort(),
+        words: shuffleN(wordBucket, num, random).slice(0, num).sort(),
       });
     } else {
       res

@@ -1,6 +1,10 @@
 import express from "express";
 import axios, { AxiosResponse } from "axios";
-import { RequestBody, ResponseBody } from "./interfaces";
+import {
+  DeckRequestBody,
+  DeckResponseBody,
+  WordRequestBody,
+} from "./interfaces";
 import path from "path";
 
 const port = 8000;
@@ -12,7 +16,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.get("/deck/:seed", (req, res) => {
   axios
-    .get<RequestBody, AxiosResponse<ResponseBody>, RequestBody>(
+    .get<DeckRequestBody, AxiosResponse<DeckResponseBody>, DeckRequestBody>(
       "http://localhost:" + deckPort.toString(),
       {
         data: { seed: req.params.seed },
@@ -32,12 +36,12 @@ app.get("/deck/:seed", (req, res) => {
     });
 });
 
-app.get("/word", (req, res) => {
+app.get("/words", (req, res) => {
   axios
-    .get<RequestBody, AxiosResponse<ResponseBody>, RequestBody>(
+    .get<WordRequestBody, AxiosResponse<DeckResponseBody>, WordRequestBody>(
       "http://localhost:" + wordPort.toString(),
       {
-        data: { seed: "Hello world" },
+        data: { num: 100 },
       }
     )
     .then((value) => {

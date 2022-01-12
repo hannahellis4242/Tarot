@@ -1,4 +1,4 @@
-export interface RequestBody {
+export interface DeckRequestBody {
   seed: string;
 }
 
@@ -7,15 +7,19 @@ interface index {
   reversed: boolean;
 }
 
-interface ResponseBodySuccess {
+interface DeckResponseBodySuccess {
   seed: string;
   time: number;
   deck: index[];
 }
 
-interface ResponseBodyError {
+interface DeckResponseBodyError {
   time: number;
   err: string;
 }
 
-export type ResponseBody = ResponseBodySuccess | ResponseBodyError;
+export type DeckResponseBody = DeckResponseBodySuccess | DeckResponseBodyError;
+
+export interface WordRequestBody {
+  num: number;
+}
