@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import random from "random";
 import seedrandom from "seedrandom";
 import { createDeck, index, shuffle } from "./deck";
+import { LookUp } from "./LookUp";
 
 interface RequestBody {
   seed: string;
@@ -28,7 +29,10 @@ class ResponceBodyError {
 
 type ResponceBody = ResponceBodySuccess | ResponceBodyError;
 
-const createResponceBody = (body: RequestBody | object): ResponceBody => {
+const createResponceBody = (
+  lookup: LookUp,
+  body: RequestBody | object
+): ResponceBody => {
   if ("seed" in body) {
     return new ResponceBodySuccess(body.seed, body.draw);
   } else {
@@ -36,12 +40,13 @@ const createResponceBody = (body: RequestBody | object): ResponceBody => {
   }
 };
 
-export const handleRequest: RequestHandler = (req, res) => {
-  //console.log(req.body);
-  if ("seed" in req.body) {
-    res.status(200);
-  } else {
-    res.status(500);
-  }
-  res.send(createResponceBody(req.body));
+export const handleRequest = (lookup: LookUp): RequestHandler => {
+  return (req, res) => {
+    if ("seed" in req.body) {
+      res.status(200);
+    } else {
+      res.status(500);
+    }
+    res.send(createResponceBody(lookup, req.body));
+  };
 };

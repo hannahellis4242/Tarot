@@ -1,4 +1,5 @@
 import { Random } from "random";
+import { LookUp, Suit } from "./LookUp";
 
 export class index {
   constructor(public num: number, public reversed: boolean) {}
@@ -19,18 +20,28 @@ export const shuffle = (deck: index[], rng: Random): index[] => {
   return deck;
 };
 
-export type Suit = "Wands" | "Cups" | "Swords" | "Pentacles" | null;
-
-export const suit = (x: number): Suit => {
-  if (!Number.isInteger(x) || x < 22 || x > 77) {
+type SuitGetterFn = (x: number) => Suit | null;
+export const suitGetterFn = (lookup: LookUp): SuitGetterFn => {
+  return (x: number) => {
+    const entry = lookup.find((_, index) => index === x);
+    if (entry) {
+      if (entry.suit) {
+        return entry.suit;
+      }
+    }
     return null;
-  } else if (x > 21 && x <= 35) {
-    return "Wands";
-  } else if (x > 35 && x <= 49) {
-    return "Cups";
-  } else if (x > 49 && x <= 63) {
-    return "Swords";
-  } else {
-    return "Pentacles";
-  }
+  };
+};
+
+type PipGetterFn = (x: number) => string;
+export const pipGetterFn = (lookup: LookUp): SuitGetterFn => {
+  return (x: number) => {
+    const entry = lookup.find((_, index) => index === x);
+    if (entry) {
+      if (entry.suit) {
+        return entry.suit;
+      }
+    }
+    return null;
+  };
 };
