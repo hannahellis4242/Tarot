@@ -1,8 +1,21 @@
 import { Random } from "random";
-import { LookUp, Suit } from "./LookUp";
+import CardInfo, { Suit } from "./CardInfo";
+
+const info = new CardInfo();
 
 export class index {
-  constructor(public num: number, public reversed: boolean) {}
+  suit?: Suit;
+  pip?: string;
+  constructor(public num: number, public reversed: boolean) {
+    const pipValue = info.pip(num);
+    if (pipValue) {
+      this.pip = pipValue;
+    }
+    const suitValue = info.suit(num);
+    if (suitValue) {
+      this.suit = suitValue;
+    }
+  }
 }
 
 export const createDeck = (): index[] =>
@@ -18,30 +31,4 @@ export const shuffle = (deck: index[], rng: Random): index[] => {
     deck[i].reversed = deck[i].reversed != rng.boolean();
   }
   return deck;
-};
-
-type SuitGetterFn = (x: number) => Suit | null;
-export const suitGetterFn = (lookup: LookUp): SuitGetterFn => {
-  return (x: number) => {
-    const entry = lookup.find((_, index) => index === x);
-    if (entry) {
-      if (entry.suit) {
-        return entry.suit;
-      }
-    }
-    return null;
-  };
-};
-
-type PipGetterFn = (x: number) => string;
-export const pipGetterFn = (lookup: LookUp): SuitGetterFn => {
-  return (x: number) => {
-    const entry = lookup.find((_, index) => index === x);
-    if (entry) {
-      if (entry.suit) {
-        return entry.suit;
-      }
-    }
-    return null;
-  };
 };

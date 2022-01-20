@@ -1,4 +1,11 @@
-import { LookUp, Suit } from "./LookUp";
+export type Suit = "Wands" | "Cups" | "Swords" | "Pentacles";
+
+interface LookUpEntry {
+  pip: string;
+  suit?: Suit;
+}
+
+type LookUp = LookUpEntry[];
 
 export default class CardInfo {
   lookup: LookUp;
