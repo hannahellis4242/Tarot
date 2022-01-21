@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  deck:
+    build: deck
+    environment: PORT:3000
+  little:
+    build: little
+    environment: PORT:4000
+    ports:
+      - "4000:80"
