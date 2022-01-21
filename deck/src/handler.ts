@@ -44,3 +44,12 @@ export const handleRequest: RequestHandler = (req, res) => {
   }
   res.send(createResponceBody(req.body));
 };
+
+export const handleRequestQuery: RequestHandler = (req, res) => {
+  if ("seed" in req.query) {
+    res.status(200);
+  } else {
+    res.status(500);
+  }
+  res.send(createResponceBody(req.query));
+};

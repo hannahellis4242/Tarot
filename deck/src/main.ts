@@ -1,5 +1,5 @@
 import express from "express";
-import { handleRequest } from "./handler";
+import { handleRequest, handleRequestQuery } from "./handler";
 
 const getPort = (d: number): number => {
   if (process.env.PORT) {
@@ -12,6 +12,7 @@ const port = getPort(5000);
 const app = express();
 app.use(express.json());
 app.get("/", handleRequest);
+app.get("/deck", handleRequestQuery);
 
 app.listen(port, "localhost", () => {
   console.log(`listening at http://localhost:${port}`);
