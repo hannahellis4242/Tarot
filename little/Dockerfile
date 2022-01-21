@@ -1,7 +1,8 @@
 FROM node:alpine
-COPY src src
 COPY package.json .
-COPY public public
 RUN npm i
+COPY tsconfig.json tsconfig.json
+COPY src src
 RUN npx tsc
+COPY public public
 CMD node dist/main.js

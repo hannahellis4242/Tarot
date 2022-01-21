@@ -1,4 +1,5 @@
 import express from "express";
+import morgan from "morgan";
 import { handleRequest, handleRequestQuery } from "./handler";
 
 const getPort = (d: number): number => {
@@ -8,12 +9,14 @@ const getPort = (d: number): number => {
   return d;
 };
 
+const host = "0.0.0.0";
 const port = getPort(5000);
 const app = express();
 app.use(express.json());
+app.use(morgan("combined"));
 app.get("/", handleRequest);
 app.get("/deck", handleRequestQuery);
 
-app.listen(port, "localhost", () => {
-  console.log(`listening at http://localhost:${port}`);
+app.listen(port, host, () => {
+  console.log(`listening at http://${host}:${port}`);
 });
