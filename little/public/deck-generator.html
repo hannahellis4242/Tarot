@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Tarot</title>
+    <title>Deck Input</title>
   </head>
   <body>
     <nav role="navigation">
@@ -21,19 +21,16 @@
       </ul>
     </nav>
     <main>
-      <header>Welcome</header>
+      <header>Tarot Deck Generator</header>
       <section>
-        <p>
-          Reading tarot cards is a wonderful way of unlocking your intuition and
-          using it to guide you through your everyday life.
-        </p>
-        <p>
-          On this site you will find many tools to help you practice and develop
-          your tarot skills, as well as a possile way to do an online reading.
-          Details on how to do that will be included in the instructions page,
-          which you can see on the navigation bar or you can follow this link
-          <a href="instructions.html">here</a>
-        </p>
+        <img src="https://placekitten.com/200/300" alt="placeholder image" />
+        <form action="/deck">
+          <label for="seed">seed:</label><br />
+          <input type="text" id="seed" name="seed" /><br />
+          <label for="draw">draw:</label><br />
+          <input type="number" id="draw" name="draw" />
+          <input type="submit" value="Submit" />
+        </form>
       </section>
     </main>
   </body>

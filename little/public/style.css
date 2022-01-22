@@ -1,5 +1,6 @@
 body {
   background: black;
+  padding: 2em;
 }
 
 main {
@@ -11,6 +12,7 @@ main {
   );
   border-radius: 1em;
   padding: 2em;
+  margin-top: 5em;
 }
 
 header {
@@ -37,4 +39,88 @@ label {
   color: white;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 1.2em;
+}
+
+p {
+  color: white;
+}
+
+p ul {
+  list-style: none; /* Remove default bullets */
+}
+
+p ul li::before {
+  content: "\2022"; /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: red; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
+}
+
+a {
+  text-decoration: none;
+}
+
+nav {
+  font-family: monospace;
+  float: none;
+}
+
+nav ul {
+  background: darkorange;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
+}
+
+nav li {
+  color: white;
+  background: darkorchid;
+  display: block;
+  float: left;
+  padding: 1em;
+  position: relative;
+  text-decoration: none;
+  transition-duration: 0.5s;
+}
+
+nav li a {
+  color: white;
+}
+
+nav li:hover,
+nav li:focus-within {
+  background: purple;
+  cursor: pointer;
+}
+
+nav li:focus-within a {
+  outline: none;
+}
+
+nav ul li ul {
+  background: darkorchid;
+  visibility: hidden;
+  opacity: 0;
+  min-width: 5em;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1em;
+  left: 0;
+  display: none;
+}
+
+nav ul li:hover > ul,
+nav ul li:focus-within > ul,
+nav ul li ul:hover,
+nav ul li ul:focus {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+nav ul li ul li {
+  clear: both;
+  width: 100%;
 }
