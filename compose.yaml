@@ -8,8 +8,8 @@ services:
       - WORD_FILE=words.txt
     ports:
       - "5000:5001"
-  little:
-    build: little
+  web:
+    web: little
     environment:
       - DECK_HOST=deck
       - DECK_PORT=5000
