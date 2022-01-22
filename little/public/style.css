@@ -1,0 +1,40 @@
+body {
+  background: black;
+}
+
+main {
+  background: rgb(80, 19, 80);
+  background: linear-gradient(
+    45deg,
+    rgba(80, 19, 80, 1) 0%,
+    rgba(222, 40, 26, 1) 100%
+  );
+  border-radius: 1em;
+  padding: 2em;
+}
+
+header {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 5em;
+  text-align: center;
+}
+
+section {
+  background: black;
+  padding: 1em;
+  border-radius: 1em;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+form {
+  float: right;
+  margin: 1em;
+}
+
+label {
+  color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 1.2em;
+}
