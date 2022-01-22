@@ -1,5 +1,5 @@
 FROM node:alpine
-COPY uniqueFilteredWorldList.txt words.txt
+COPY uniqueFilteredWordList.txt words.txt
 COPY tsconfig.json tsconfig.json
 COPY package.json .
 RUN npm i
