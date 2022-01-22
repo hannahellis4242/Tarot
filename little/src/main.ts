@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 
 app.get("/deck", (req, res) => {
   axios
-    .get(deckHost + ":" + deckPort.toString() + "/deck", {
+    .get("http://" + deckHost + ":" + deckPort.toString() + "/deck", {
       params: { seed: req.query.seed, draw: req.query.draw },
     })
     .then((value) => {
