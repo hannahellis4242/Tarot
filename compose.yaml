@@ -2,6 +2,12 @@ version: "3.9"
 services:
   deck:
     build: deck
+  word:
+    build: word
+    environment:
+      - WORD_FILE=words.txt
+    ports:
+      - "5000:5001"
   little:
     build: little
     environment:

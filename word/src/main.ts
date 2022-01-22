@@ -5,9 +5,15 @@ import { createReadStream } from "fs";
 import { addWordDirect } from "./controler";
 import randomRouter from "./RandomHandler";
 
-const reader = readLine.createInterface(
-  createReadStream("uniqueFilteredWordList.txt")
-);
+const getWordFileName = () => {
+  if (process.env.WORD_FILE) {
+    return process.env.WORD_FILE;
+  }
+  return "uniqueFilteredWordList.txt";
+};
+
+const reader = readLine.createInterface(createReadStream(getWordFileName()));
+
 reader.on("line", (line) => {
   addWordDirect(line);
 });
