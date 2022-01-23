@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head',{title}); %>
+  </head>
+  <body>
+    <%- include('../partials/nav'); %>
+    <main>
+      <header>Welcome</header>
+      <section>
+        <% cards.forEach((card)=>{ %> <%- include('../partials/show-card',
+        {card}); %> <% }); %>
+      </section>
+    </main>
+  </body>
+</html>

@@ -64,7 +64,8 @@ app.get("/deck", (req, res) => {
         console.log("error :", value.data.err);
         res.status(200).send("Error");
       } else {
-        res.status(200).json(value.data);
+        res.render("pages/deck-result", { title: "Cards", cards: value.data });
+        //res.status(200).json(value.data);
       }
     })
     .catch((reason) => {
