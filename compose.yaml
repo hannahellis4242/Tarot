@@ -9,7 +9,7 @@ services:
     ports:
       - "5000:5001"
   web:
-    web: little
+    build: web
     environment:
       - DECK_HOST=deck
       - DECK_PORT=5000
