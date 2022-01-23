@@ -6,10 +6,16 @@
   <body>
     <%- include('../partials/nav'); %>
     <main>
-      <header>Welcome</header>
-      <section>
-        <% cards.forEach((card)=>{ %> <%- include('../partials/show-card',
-        {card}); %> <% }); %>
+      <header>Your Cards</header>
+      <section class="result">
+        <ol>
+          <% cards.deck.forEach((card)=>{ %>
+          <li>
+            <% if(card.suit){ %> <%= card.pip %> of <%= card.suit %> <% } else {
+            %> <%= card.pip %> <% } %> <% if(card.reversed) { %> (rev) <% } %>
+          </li>
+          <%})%>
+        </ol>
       </section>
     </main>
   </body>

@@ -44,14 +44,22 @@ label {
 p {
   color: white;
 }
-
+/*
 p ul {
-  list-style: none; /* Remove default bullets */
+  list-style: none; /* Remove default bullets */ /*
 }
 
-li::marker {
+p ul li::marker {
   color: purple;
   content: "➤  ";
+}*/
+
+section ol li {
+  color: white;
+}
+
+section.result {
+  font-size: 2em;
 }
 
 a {
