@@ -64,7 +64,6 @@ nav {
 }
 
 nav ul {
-  background: darkorange;
   list-style: none;
   margin: 0;
   padding-left: 0;
@@ -88,7 +87,6 @@ nav li a {
 nav li:hover,
 nav li:focus-within {
   background: purple;
-  cursor: pointer;
 }
 
 nav li:focus-within a {

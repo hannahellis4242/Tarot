@@ -31,7 +31,28 @@ const deckPort = getDeckPort();
 const app = express();
 app.use(express.json());
 app.use(morgan("combined"));
+app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "..", "public")));
+
+app.get("/", (_, res) => {
+  res.render("pages/index", { title: "Tarot" });
+});
+
+app.get("/index", (_, res) => {
+  res.render("pages/index", { title: "Tarot" });
+});
+
+app.get("/instructions", (_, res) => {
+  res.render("pages/instructions", { title: "Instructions" });
+});
+
+app.get("/tarot", (_, res) => {
+  res.render("pages/tarot", { title: "Tarot" });
+});
+
+app.get("/deck-generator", (_, res) => {
+  res.render("pages/deck-generator", { title: "Deck Input" });
+});
 
 app.get("/deck", (req, res) => {
   axios
