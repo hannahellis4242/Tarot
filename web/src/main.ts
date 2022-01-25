@@ -95,6 +95,10 @@ app.get("/word", (req, res) => {
     });
 });
 
+app.get("/seed", (req, res) => {
+  res.render("pages/seed", { title: "Seeds" });
+});
+
 app.listen(web.port, web.host, () => {
   console.log(`listening at http://${web.host}:${web.port}`);
 });
