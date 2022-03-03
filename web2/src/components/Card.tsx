@@ -1,16 +1,14 @@
 import React from "react";
-import card0 from "./img/00.jpg";
+import pickCardImage from "./pickCardImage";
 
 const Card: React.FC<{ num: number; reversed: boolean }> = ({
   num,
   reversed,
 }) => {
   return (
-    <section>
-      <figure>
-        <img src={card0} alt="tarot card" />
-      </figure>
-    </section>
+    <figure>
+      <img src={pickCardImage(num)} alt="tarot card" />
+    </figure>
   );
 };
 
