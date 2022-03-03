@@ -1,6 +1,14 @@
 import React from "react";
+import Input from "./components/Input";
+import Result from "./components/Result";
 const App: React.FC = () => {
-  return <p>Hello World</p>;
+  return (
+    <section>
+      <header>Deck Generator</header>
+      <Input />
+      <Result />
+    </section>
+  );
 };
 
 export default App;
