@@ -1,6 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { ResultContext } from "../store/ResultContext";
+import Card from "./Card";
 const Result: React.FC = () => {
   const context = useContext(ResultContext);
   let body = null;
@@ -8,7 +9,11 @@ const Result: React.FC = () => {
     body = (
       <ul>
         {context.result.deck.map((card) => {
-          return <li key={card.num}>{JSON.stringify(card)}</li>;
+          return (
+            <li key={card.num}>
+              <Card num={card.num} reversed={card.reversed} />
+            </li>
+          );
         })}
       </ul>
     );
