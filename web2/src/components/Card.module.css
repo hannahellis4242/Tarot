@@ -1,0 +1,8 @@
+.card {
+  width: 5em;
+}
+
+.card_rev {
+  width: 5em;
+  transform: rotate(180deg);
+}

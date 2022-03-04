@@ -1,0 +1,19 @@
+.index_label {
+  text-align: left;
+  font-size: 1.1em;
+}
+
+.name_label {
+  text-align: center;
+}
+
+.results table {
+  border-collapse: collapse;
+}
+
+.results td,
+th {
+  border: 1px solid #999;
+  padding: 0.5rem;
+  text-align: left;
+}
