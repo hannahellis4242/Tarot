@@ -1,10 +1,14 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { ResultContext } from "../store/ResultContext";
-const Input: React.FC = () => {
+import { SelectedWordsContext } from "../store/SelectedWordsContext";
+import { WordsContext } from "../store/WordsContext";
+const GeneratorInput: React.FC = () => {
   const seedRef = useRef<HTMLInputElement>(null);
   const numRef = useRef<HTMLInputElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const context = useContext(ResultContext);
+  const selectedContext = useContext(SelectedWordsContext);
+  const wordsContext = useContext(WordsContext);
 
   const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -16,19 +20,28 @@ const Input: React.FC = () => {
       } else {
         context.getResult(seed.value);
       }
-      seed.value = "";
+      selectedContext.setSelected([]);
+      wordsContext.refresh();
       handleInputChanged();
     }
+  };
+  const canSubmit = (): boolean => {
+    const input = seedRef.current;
+    return input ? input.value.trim() !== "" : false;
   };
   const handleInputChanged = () => {
     const button = buttonRef.current;
     if (button) {
-      const input = seedRef.current;
-      if (input) {
-        button.disabled = input.value === "";
-      }
+      button.disabled = !canSubmit();
     }
   };
+  useEffect(() => {
+    const input = seedRef.current;
+    if (input) {
+      input.value = selectedContext.selected.join("-");
+      handleInputChanged();
+    }
+  });
 
   return (
     <form onSubmit={onSubmitHandler}>
@@ -64,9 +77,8 @@ const Input: React.FC = () => {
           </tr>
           <tr>
             <td colSpan={2}>
-              {" "}
-              <button ref={buttonRef} disabled={true}>
-                Submit
+              <button ref={buttonRef} disabled={!canSubmit()}>
+                Generate Cards
               </button>
             </td>
           </tr>
@@ -76,4 +88,4 @@ const Input: React.FC = () => {
   );
 };
 
-export default Input;
+export default GeneratorInput;

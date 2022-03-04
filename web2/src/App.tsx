@@ -1,14 +1,7 @@
 import React from "react";
-import Input from "./components/Input";
-import Result from "./components/Result";
+import Generator from "./components/Generator";
 const App: React.FC = () => {
-  return (
-    <section>
-      <header>Deck Generator</header>
-      <Input />
-      <Result />
-    </section>
-  );
+  return <Generator />;
 };
 
 export default App;

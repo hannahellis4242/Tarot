@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ResultContext } from "../store/ResultContext";
 import Card from "./Card";
 import { CardModel } from "../models/ResultModel";
-import classes from "./Result.module.css";
+import classes from "./GeneratorResult.module.css";
 import chunk from "../Util/chunk";
 
 const cardName = (card: CardModel) => {
@@ -11,7 +11,7 @@ const cardName = (card: CardModel) => {
   return card.reversed ? `${name} (rev)` : name;
 };
 
-const Result: React.FC = () => {
+const GeneratorResult: React.FC = () => {
   const context = useContext(ResultContext);
   let body = null;
   if (context.result) {
@@ -23,14 +23,13 @@ const Result: React.FC = () => {
           <tbody>
             {rows.map((row, rowIndex) => {
               return (
-                <tr>
+                <tr key={rowIndex}>
                   {row.map((card, colIndex) => {
                     const name = cardName(card);
+                    const index = rowIndex * columns + colIndex + 1;
                     return (
-                      <td key={card.num}>
-                        <p className={classes.index_label}>
-                          {rowIndex * columns + colIndex + 1}
-                        </p>
+                      <td key={index}>
+                        <p className={classes.index_label}>{index}</p>
                         <Card
                           num={card.num}
                           reversed={card.reversed}
@@ -51,4 +50,4 @@ const Result: React.FC = () => {
   return <section className={classes.results}>{body}</section>;
 };
 
-export default Result;
+export default GeneratorResult;

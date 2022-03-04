@@ -1,6 +1,7 @@
 import express from "express";
 import router from "./handler";
 import readLine from "readline";
+import cors from "cors";
 import { createReadStream } from "fs";
 import { addWordDirect } from "./controler";
 import randomRouter from "./RandomHandler";
@@ -29,8 +30,12 @@ const port = getPort(5001);
 const host = "0.0.0.0";
 const app = express();
 app.use(express.json());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 app.use("/", router);
-app.use("/random", randomRouter);
+app.use("/random", cors(corsOptions), randomRouter);
 
 app.listen(port, host, () => {
   console.log(`listening at http://${host}:${port}`);
