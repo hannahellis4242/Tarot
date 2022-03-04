@@ -2,16 +2,19 @@ version: "3.9"
 services:
   deck:
     build: deck
+    environment:
+      - CORS_URL=web
   word:
     build: word
     environment:
       - WORD_FILE=words.txt
-    ports:
-      - "5000:5001"
+      - CORS_URL=web
   web:
-    build: web
+    build: web2
     environment:
       - DECK_HOST=deck
       - DECK_PORT=5000
+      - WORD_HOST=word
+      - WORD_PORT=5001
     ports:
       - "80:3000"

@@ -1,9 +1,9 @@
 FROM node:alpine
-WORKDIR /word
+WORKDIR /web
 COPY package.json .
 RUN npm i
-COPY uniqueFilteredWordList.txt words.txt
+COPY index.d.ts index.d.ts
 COPY tsconfig.json tsconfig.json
+COPY public public
 COPY src src
-RUN npx tsc
-CMD node dist/main.js
+CMD npm start
