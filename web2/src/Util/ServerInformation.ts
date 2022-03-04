@@ -40,14 +40,14 @@ export default class ServerInformation {
   }
 
   getHost(x: string) {
-    return new Option(this.info.find(({ name }) => x == name));
+    return new Option(this.info.find(({ name }) => x === name));
   }
 
   getPort(x: string) {
-    return new Option(this.info.find(({ name }) => x == name));
+    return new Option(this.info.find(({ name }) => x === name));
   }
 
   get(x: string): Option<{ host: string; port: number }> {
-    return new Option(this.info.find(({ name }) => x == name));
+    return new Option(this.info.find(({ name }) => x === name));
   }
 }

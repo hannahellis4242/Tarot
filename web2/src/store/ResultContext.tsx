@@ -23,11 +23,13 @@ const getURL = () => {
     .unwrap_or("http://localhost:5001/deck");
 };
 
+const url = getURL();
 const ResultContextProvider: React.FC = (props) => {
   const [result, setResult] = useState<ResultModel | null>(null);
 
   const getResultHandler = (seed: string, num?: number) => {
-    axios.get(getURL(), { params: { seed, draw: num } }).then((res) => {
+    console.log(url);
+    axios.get(url, { params: { seed, draw: num } }).then((res) => {
       setResult((prev) => res.data);
     });
   };

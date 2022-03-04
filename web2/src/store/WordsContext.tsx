@@ -21,13 +21,14 @@ const getURL = () => {
     })
     .unwrap_or("http://localhost:5001/random");
 };
-
+const url = getURL();
 const WordsContextProvider: React.FC = (props) => {
   const [words, setWords] = useState<string[]>([]);
 
   const getWordsHandler = () => {
+    console.log(url);
     axios
-      .get(getURL(), { params: { num: 100 } })
+      .get(url, { params: { num: 100 } })
       .then((res) => {
         setWords((prev) => res.data.words);
       })
