@@ -1,7 +1,10 @@
 FROM node:alpine
-COPY tsconfig.json tsconfig.json
+WORKDIR /web
 COPY package.json .
 RUN npm i
+COPY tsconfig.json tsconfig.json
+COPY 
+
 COPY src src
 RUN npx tsc
 COPY public public

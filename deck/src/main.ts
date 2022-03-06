@@ -9,25 +9,15 @@ const getPort = (d: number): number => {
   }
   return d;
 };
-const getCorsURL = (d: string): string => {
-  if (process.env.CORS_URL) {
-    return process.env.CORS_URL;
-  }
-  return d;
-};
 
 const host = "0.0.0.0";
 const port = getPort(5000);
 const app = express();
-const corsOptions = {
-  origin: getCorsURL("http://localhost:3000"),
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
 
 app.use(express.json());
 app.use(morgan("combined"));
 app.get("/", handleRequest);
-app.get("/deck", cors(corsOptions), handleRequestQuery);
+app.get("/deck", cors(), handleRequestQuery);
 
 app.listen(port, host, () => {
   console.log(`listening at http://${host}:${port}`);
