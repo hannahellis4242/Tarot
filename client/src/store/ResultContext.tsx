@@ -13,7 +13,7 @@ export const ResultContext = createContext<ResultModelContext>({
   getResult: (seed: string, num?: number) => {},
 });
 
-const serverInfo = new ServerInformation("local");
+const serverInfo = new ServerInformation();
 const getURL = () => {
   return serverInfo
     .get("deck")

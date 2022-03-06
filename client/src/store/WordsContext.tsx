@@ -12,7 +12,7 @@ export const WordsContext = createContext<WordModelContext>({
   refresh: () => {},
 });
 
-const serverInfo = new ServerInformation("local");
+const serverInfo = new ServerInformation();
 const getURL = () => {
   return serverInfo
     .get("word")

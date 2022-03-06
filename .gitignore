@@ -105,3 +105,4 @@ dist
 
 package-lock.json
 main/public/scripts
+web_serve/public
