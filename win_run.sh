@@ -1,0 +1,1 @@
+sh win_scripts/run_deck.sh & sh win_scripts/run_word.sh & sh win_scripts/run_web.sh
