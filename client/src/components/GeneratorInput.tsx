@@ -2,13 +2,24 @@ import React, { useContext, useRef, useEffect } from "react";
 import { ResultContext } from "../store/ResultContext";
 import { SelectedWordsContext } from "../store/SelectedWordsContext";
 import { WordsContext } from "../store/WordsContext";
+import Option from "../Util/Option";
 const GeneratorInput: React.FC = () => {
   const seedRef = useRef<HTMLInputElement>(null);
   const numRef = useRef<HTMLInputElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
+  const copyButtonRef = useRef<HTMLButtonElement>(null);
   const context = useContext(ResultContext);
   const selectedContext = useContext(SelectedWordsContext);
   const wordsContext = useContext(WordsContext);
+
+  const copySeed = () => {
+    new Option(seedRef.current).map((seed) =>
+      navigator.clipboard
+        .writeText(seed.value)
+        .then(() => alert("seed copied to clipboard"))
+        .catch(() => alert("could not copy"))
+    );
+  };
 
   const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
@@ -30,9 +41,13 @@ const GeneratorInput: React.FC = () => {
     return input ? input.value.trim() !== "" : false;
   };
   const handleInputChanged = () => {
-    const button = buttonRef.current;
-    if (button) {
-      button.disabled = !canSubmit();
+    const submitButton = submitButtonRef.current;
+    if (submitButton) {
+      submitButton.disabled = !canSubmit();
+    }
+    const copyButton = copyButtonRef.current;
+    if (copyButton) {
+      copyButton.disabled = !canSubmit();
     }
   };
   useEffect(() => {
@@ -76,8 +91,22 @@ const GeneratorInput: React.FC = () => {
             </td>
           </tr>
           <tr>
-            <td colSpan={2}>
-              <button ref={buttonRef} disabled={!canSubmit()}>
+            <td>
+              <button
+                type="button"
+                ref={copyButtonRef}
+                disabled={!canSubmit()}
+                onClick={copySeed}
+              >
+                Copy Seed
+              </button>
+            </td>
+            <td>
+              <button
+                type="submit"
+                ref={submitButtonRef}
+                disabled={!canSubmit()}
+              >
                 Generate Cards
               </button>
             </td>
