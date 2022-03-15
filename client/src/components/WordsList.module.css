@@ -1,0 +1,23 @@
+.words_list {
+  border-radius: 5px;
+  border: 1px black solid;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  width: fit-content;
+  background: gainsboro;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.right {
+  float: right;
+}
+
+.btn {
+  background-color: blue;
+  color: white;
+  padding: 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
