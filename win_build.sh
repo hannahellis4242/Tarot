@@ -3,6 +3,7 @@ root=`pwd`
 cd client
 echo "building client"
 npm i
+npm run clean
 npm run build
 cd $root
 

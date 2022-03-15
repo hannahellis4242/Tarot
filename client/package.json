@@ -19,6 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "clean":"rm -r ../web_serve/public",
     "build": "react-scripts build && mv build ../web_serve/public",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
