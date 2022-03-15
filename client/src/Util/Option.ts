@@ -1,5 +1,5 @@
 export default class Option<T> {
-  constructor(public data: T | undefined) {}
+  constructor(public data: T | undefined | null) {}
   public static Some<T>(x: T): Option<T> {
     return new Option<T>(x);
   }
