@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import ResultModel from "../models/ResultModel";
 import ServerInformation from "../Util/ServerInformation";
 
@@ -24,7 +24,7 @@ const getURL = () => {
 };
 
 const url = getURL();
-const ResultContextProvider: React.FC = (props) => {
+const ResultContextProvider: React.FC<{children:React.ReactNode}> = (props) => {
   const [result, setResult] = useState<ResultModel | null>(null);
 
   const getResultHandler = (seed: string, num?: number) => {

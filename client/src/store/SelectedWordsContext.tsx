@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import React, { createContext, useState } from "react";
 
 interface SelectedWordModel {
   selected: string[];
@@ -10,7 +10,7 @@ export const SelectedWordsContext = createContext<SelectedWordModel>({
   setSelected: (words: string[]) => {},
 });
 
-const SelectedWordsContextProvider: React.FC = (props) => {
+const SelectedWordsContextProvider: React.FC<{children:React.ReactNode}> = (props) => {
   const [selectedWords, setSelectedWords] = useState<string[]>([]);
   const setSelectedHandler = (selected: string[]) => {
     setSelectedWords((prev) => selected);

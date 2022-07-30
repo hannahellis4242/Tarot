@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import ServerInformation from "../Util/ServerInformation";
 
 interface WordModelContext {
@@ -22,7 +22,7 @@ const getURL = () => {
     .unwrap_or("http://localhost:5001/random");
 };
 const url = getURL();
-const WordsContextProvider: React.FC = (props) => {
+const WordsContextProvider: React.FC<{children:React.ReactNode}> = (props) => {
   const [words, setWords] = useState<string[]>([]);
 
   const getWordsHandler = () => {

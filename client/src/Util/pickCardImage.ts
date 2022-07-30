@@ -236,7 +236,7 @@ const pickCardImage = (num: number) => {
     case 77:
       return img_77;
   }
-  return null;
+  return undefined;
 };
 
 export default pickCardImage;
