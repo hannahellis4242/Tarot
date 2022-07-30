@@ -8,8 +8,8 @@ export const addWordDirect = (word: string) => {
 };
 
 export const addWord: RequestHandler = (req, res) => {
-  if ("word" in req.body) {
-    const { word } = req.body as { word: string };
+  if ("word" in req.query) {
+    const { word } = req.query as { word: string };
     addWordDirect(word);
     res.status(201).json({ message: "Added word", word });
   } else {
@@ -18,23 +18,33 @@ export const addWord: RequestHandler = (req, res) => {
 };
 
 export const getWord: RequestHandler = (req, res) => {
-  if ("index" in req.body) {
-    const { index } = req.body as { index: number };
-    if (index >= 0 && index < words.length) {
-      res.status(200).json({ word: words[index] });
+  if ("index" in req.query) {
+    const { index } = req.query as { index: string };
+    const n = parseInt(index);
+    if (n === null) {
+      res
+        .status(400)
+        .json({ err: true, message: "index should be a whole number index" });
+    }
+    if (n >= 0 && n < words.length) {
+      res.status(200).json({ word: words[n] });
     } else {
       res
         .status(400)
         .json({ err: true, message: "out of range", max: words.length });
     }
   } else {
-    res.status(400).json({ err: true, message: "no index requested" });
+    res.status(400).json({
+      err: true,
+      message: "no index requested",
+      usage: "/?index=<number>",
+    });
   }
 };
 
 export const removeWord: RequestHandler = (req, res) => {
-  if ("word" in req.body) {
-    const { word } = req.body as { word: string };
+  if ("word" in req.query) {
+    const { word } = req.query as { word: string };
     words = words.filter((value) => value !== word);
     res.status(200).json({ mesage: "removed", word });
   } else {
@@ -73,6 +83,7 @@ export const getRandom: RequestHandler = (req, res) => {
     res.status(400).json({
       err: true,
       message: "please spesify how many random words you require",
+      usage: "/random/?num=<number>",
     });
   }
 };

@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import morgan from "morgan";
 
-const web = { host: "0.0.0.0", port: 3000 };
+const web = { host: "0.0.0.0", port: 80 };
 
 const app = express();
 app.use(express.json());

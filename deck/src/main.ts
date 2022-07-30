@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import { handleRequest, handleRequestQuery } from "./handler";
+import { handleRequest, getHelp } from "./handler";
 
 const getPort = (d: number): number => {
   if (process.env.PORT) {
@@ -16,8 +16,8 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan("combined"));
-app.get("/", handleRequest);
-app.get("/deck", cors(), handleRequestQuery);
+app.get("/deck", cors(), handleRequest);
+app.get("/", cors(), getHelp);
 
 app.listen(port, host, () => {
   console.log(`listening at http://${host}:${port}`);

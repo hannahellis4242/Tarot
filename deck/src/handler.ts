@@ -3,6 +3,8 @@ import random from "random";
 import seedrandom from "seedrandom";
 import { createDeck, index, shuffle } from "./deck";
 
+const helpStr = ["/deck/?seed=<value>", "/deck/?seed=<value>&draw=<number>"];
+
 interface RequestBody {
   seed: string;
   draw?: number;
@@ -21,7 +23,7 @@ class ResponceBodySuccess {
 
 class ResponceBodyError {
   time: number;
-  constructor(public err: string) {
+  constructor(public err: string, public usage: string[]) {
     this.time = Date.now();
   }
 }
@@ -33,22 +35,6 @@ const createResponceBody = (body: RequestBody): ResponceBody => {
 };
 
 export const handleRequest: RequestHandler = (req, res) => {
-  if (req.body.seed) {
-    const seed: string = req.body.seed;
-    res.status(200);
-    if (req.body.draw) {
-      const draw: number = req.body.draw;
-      res.send(createResponceBody({ seed, draw }));
-    } else {
-      res.send(createResponceBody({ seed }));
-    }
-  } else {
-    res.status(500);
-    res.send(new ResponceBodyError("no seed"));
-  }
-};
-
-export const handleRequestQuery: RequestHandler = (req, res) => {
   if (req.query.seed) {
     const seed: string = req.query.seed.toString();
     res.status(200);
@@ -59,7 +45,10 @@ export const handleRequestQuery: RequestHandler = (req, res) => {
       res.send(createResponceBody({ seed }));
     }
   } else {
-    res.status(500);
-    res.send(new ResponceBodyError("no seed"));
+    res.status(400).send(new ResponceBodyError("no seed", helpStr));
   }
+};
+
+export const getHelp: RequestHandler = (req, res) => {
+  res.status(400).send(new ResponceBodyError("help", helpStr));
 };
