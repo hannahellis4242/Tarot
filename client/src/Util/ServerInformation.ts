@@ -1,4 +1,6 @@
 import Option from "./Option";
+import config from "../config";
+
 interface ServerInfo {
   name: string;
   host: string;
@@ -20,15 +22,15 @@ export default class ServerInformation {
     //add deck sever
     this.info.push({
       name: "deck",
-      host: "localhost",
-      port: 5000,
+      host: config.deck.host,
+      port: config.deck.port,
     });
 
     //add word sever
     this.info.push({
       name: "word",
-      host: "localhost",
-      port: 5001,
+      host: config.word.host,
+      port: config.word.port,
     });
   }
 
