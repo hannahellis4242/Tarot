@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && electron dist/electron.js",
-    "build": "webpack --config ./webpack.config.js",
-    "clean": "rm -r dist"
+    "start": "npm run build && electron build/electron.js",
+    "build": "react-scripts build && webpack --config ./webpack.config.js",
+    "clean": "rm -r build"
   },
   "keywords": [],
   "author": "",
@@ -18,9 +18,22 @@
     "html-webpack-plugin": "^5.5.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-scripts": "^5.0.1",
     "ts-loader": "^9.2.9",
     "typescript": "^4.6.3",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

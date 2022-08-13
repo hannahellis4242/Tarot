@@ -16,11 +16,11 @@ module.exports = [
       ],
     },
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "build"),
       filename: "electron.js",
     },
   },
-  {
+  /*{
     mode: "development",
     entry: path.resolve(__dirname, "src", "react.tsx"),
     target: "electron-renderer",
@@ -28,7 +28,7 @@ module.exports = [
     module: {
       rules: [
         {
-          test: /\.ts(x?)$/,
+          test: /\.ts(x?)|module.css$/,
           include: /src/,
           use: [{ loader: "ts-loader" }],
         },
@@ -40,5 +40,5 @@ module.exports = [
         template: path.resolve(__dirname, "src", "index.html"),
       }),
     ],
-  },
+  },*/
 ];
