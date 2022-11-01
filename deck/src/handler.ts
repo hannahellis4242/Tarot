@@ -9,7 +9,7 @@ interface RequestBody {
   seed: string;
   draw?: number;
 }
-class ResponceBodySuccess {
+class ResponseBodySuccess {
   time: number;
   deck: index[];
   constructor(public seed: string, draw?: number) {
@@ -21,17 +21,17 @@ class ResponceBodySuccess {
   }
 }
 
-class ResponceBodyError {
+class ResponseBodyError {
   time: number;
   constructor(public err: string, public usage: string[]) {
     this.time = Date.now();
   }
 }
 
-type ResponceBody = ResponceBodySuccess | ResponceBodyError;
+type ResponseBody = ResponseBodySuccess | ResponseBodyError;
 
-const createResponceBody = (body: RequestBody): ResponceBody => {
-  return new ResponceBodySuccess(body.seed, body.draw);
+const createResponseBody = (body: RequestBody): ResponseBody => {
+  return new ResponseBodySuccess(body.seed, body.draw);
 };
 
 export const handleRequest: RequestHandler = (req, res) => {
@@ -40,15 +40,11 @@ export const handleRequest: RequestHandler = (req, res) => {
     res.status(200);
     if (req.query.draw) {
       const draw: number = Number(req.query.draw.toString());
-      res.send(createResponceBody({ seed, draw }));
+      res.send(createResponseBody({ seed, draw }));
     } else {
-      res.send(createResponceBody({ seed }));
+      res.send(createResponseBody({ seed }));
     }
   } else {
-    res.status(400).send(new ResponceBodyError("no seed", helpStr));
+    res.status(400).send(new ResponseBodyError("no seed", helpStr));
   }
-};
-
-export const getHelp: RequestHandler = (req, res) => {
-  res.status(400).send(new ResponceBodyError("help", helpStr));
 };
