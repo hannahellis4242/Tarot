@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { createContext, useState } from "react";
 import ResultModel from "../models/ResultModel";
-import ServerInformation from "../Util/ServerInformation";
 
 interface ResultModelContext {
   result: ResultModel | null;
@@ -13,24 +12,14 @@ export const ResultContext = createContext<ResultModelContext>({
   getResult: (seed: string, num?: number) => {},
 });
 
-const serverInfo = new ServerInformation();
-const getURL = () => {
-  return serverInfo
-    .get("deck")
-    .map(({ host, port }) => {
-      return `http://${host}:${port}/deck`;
-    })
-    .unwrap_or("http://localhost:5001/deck");
-};
-
-const url = getURL();
-const ResultContextProvider: React.FC<{children:React.ReactNode}> = (props) => {
+const ResultContextProvider: React.FC<{ children: React.ReactNode }> = (
+  props
+) => {
   const [result, setResult] = useState<ResultModel | null>(null);
 
   const getResultHandler = (seed: string, num?: number) => {
-    console.log(url);
-    axios.get(url, { params: { seed, draw: num } }).then((res) => {
-      setResult((prev) => res.data);
+    axios.get("/deck", { params: { seed, draw: num } }).then((res) => {
+      setResult(() => res.data);
     });
   };
 

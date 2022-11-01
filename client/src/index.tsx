@@ -1,18 +1,9 @@
-import ReactDOM from "react-dom";
-import App from "./App";
-import ResultContextProvider from "./store/ResultContext";
-import SelectedWordsContextProvider from "./store/SelectedWordsContext";
-import WordsContextProvider from "./store/WordsContext";
+import { createRoot } from "react-dom/client";
+import App from "./components/App";
+import "./index.css";
 
-console.log(JSON.stringify(process.env));
-
-ReactDOM.render(
-  <SelectedWordsContextProvider>
-    <WordsContextProvider>
-      <ResultContextProvider>
-        <App />
-      </ResultContextProvider>
-    </WordsContextProvider>
-  </SelectedWordsContextProvider>,
-  document.getElementById("root")
-);
+const container = document.getElementById("root");
+if (container) {
+  const root = createRoot(container!);
+  root.render(<App />);
+}
