@@ -7,13 +7,13 @@ services:
   deck:
     build: deck
     ports:
-      - 5000
+      - 5001
   word:
     build: word
     environment:
       - WORD_FILE=words.txt
     ports:
-      - 5001
+      - 5002
   web:
     build: web
     environment:

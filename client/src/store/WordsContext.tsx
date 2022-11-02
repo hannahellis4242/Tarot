@@ -18,7 +18,7 @@ const WordsContextProvider: React.FC<{ children: React.ReactNode }> = (
 
   const getWordsHandler = () => {
     axios
-      .get("/words/random", { params: { num: 100 } })
+      .get("/word/random", { params: { num: 100 } })
       .then((res) => {
         setWords((prev) => res.data.words);
       })
