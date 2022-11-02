@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import ResultModel from "../models/ResultModel";
 
 interface ResultModelContext {
@@ -12,9 +12,7 @@ export const ResultContext = createContext<ResultModelContext>({
   getResult: (seed: string, num?: number) => {},
 });
 
-const ResultContextProvider: React.FC<{ children: React.ReactNode }> = (
-  props
-) => {
+const ResultContextProvider = (props: { children: React.ReactNode }) => {
   const [result, setResult] = useState<ResultModel | null>(null);
 
   const getResultHandler = (seed: string, num?: number) => {

@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { SelectedWordsContext } from "../store/SelectedWordsContext";
 import { WordsContext } from "../store/WordsContext";
 import chunk from "../Util/chunk";
@@ -45,7 +45,7 @@ const clearSelected = (elements: HTMLCollection) => {
   }
 };
 
-const WordInput: React.FC = () => {
+const WordInput = () => {
   const tableRef = useRef<HTMLTableElement>(null);
   const submitRef = useRef<HTMLButtonElement>(null);
   const context = useContext(WordsContext);

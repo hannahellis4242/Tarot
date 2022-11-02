@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 
 interface WordModelContext {
   words: string[];
@@ -11,11 +11,8 @@ export const WordsContext = createContext<WordModelContext>({
   refresh: () => {},
 });
 
-const WordsContextProvider: React.FC<{ children: React.ReactNode }> = (
-  props
-) => {
+const WordsContextProvider = (props: { children: React.ReactNode }) => {
   const [words, setWords] = useState<string[]>([]);
-
   const getWordsHandler = () => {
     axios
       .get("/word/random", { params: { num: 100 } })

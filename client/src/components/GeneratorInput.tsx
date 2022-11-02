@@ -1,9 +1,9 @@
-import React, { useContext, useRef, useEffect } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { ResultContext } from "../store/ResultContext";
 import { SelectedWordsContext } from "../store/SelectedWordsContext";
 import { WordsContext } from "../store/WordsContext";
 import Option from "../Util/Option";
-const GeneratorInput: React.FC = () => {
+const GeneratorInput = () => {
   const seedRef = useRef<HTMLInputElement>(null);
   const numRef = useRef<HTMLInputElement>(null);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
