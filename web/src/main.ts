@@ -12,8 +12,8 @@ const getServerInfo = (name: string, defaultPort: number) => {
 
 const app = express();
 const client = getServerInfo("client", 3000);
-const deck = getServerInfo("deck", 5000);
-const word = getServerInfo("word", 5001);
+const deck = getServerInfo("deck", 5001);
+const word = getServerInfo("word", 5002);
 
 //set up proxy
 const proxy = createProxyServer();

@@ -1,16 +1,27 @@
 version: "3.9"
 services:
+  client:
+    build: client
+    ports:
+      - 3000
   deck:
     build: deck
     ports:
-      - "5000:5000"
+      - 5000
   word:
     build: word
     environment:
       - WORD_FILE=words.txt
     ports:
-      - "5001:5001"
+      - 5001
   web:
-    build: web_serve
+    build: web
+    environment:
+      - client-host=client
+      - client-port=3000
+      - deck-host=deck
+      - deck-port=5001
+      - word-host=word
+      - word-port=5002
     ports:
-      - "80:3000"
+      - "80:8080"
