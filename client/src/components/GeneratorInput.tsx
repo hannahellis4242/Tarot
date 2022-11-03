@@ -13,12 +13,18 @@ const GeneratorInput = () => {
   const wordsContext = useContext(WordsContext);
 
   const copySeed = () => {
-    new Option(seedRef.current).map((seed) =>
-      navigator.clipboard
-        .writeText(seed.value)
-        .then(() => alert("seed copied to clipboard"))
-        .catch(() => alert("could not copy"))
-    );
+    new Option(seedRef.current).map((seed) => {
+      if (navigator && navigator.clipboard) {
+        navigator.clipboard
+          .writeText(seed.value)
+          .then(() => alert("seed copied to clipboard"))
+          .catch(() => alert("could not copy"));
+      } else {
+        alert(
+          "Sorry copying is not available right now. I'm working on it. :)"
+        );
+      }
+    });
   };
 
   const onSubmitHandler = (event: React.FormEvent) => {
