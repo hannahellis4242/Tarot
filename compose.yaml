@@ -4,6 +4,10 @@ services:
     build: client
     ports:
       - 3000
+  home:
+    build: homepage
+    ports:
+      - 3001
   deck:
     build: deck
     ports:
@@ -23,5 +27,7 @@ services:
       - deck-port=5001
       - word-host=word
       - word-port=5002
+      - home-host=home
+      - home-port=3001
     ports:
       - "80:8080"

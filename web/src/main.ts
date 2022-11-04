@@ -11,6 +11,7 @@ const getServerInfo = (name: string, defaultPort: number) => {
 };
 
 const app = express();
+const home = getServerInfo("home", 3001);
 const client = getServerInfo("client", 3000);
 const deck = getServerInfo("deck", 5001);
 const word = getServerInfo("word", 5002);
@@ -23,8 +24,11 @@ app.use("/deck", (req, res, next) => {
 app.use("/word", (req, res, next) => {
   proxy.web(req, res, { target: `http://${word.host}:${word.port}` }, next);
 });
-app.use("/", (req, res, next) => {
+app.use("/tarot", (req, res, next) => {
   proxy.web(req, res, { target: `http://${client.host}:${client.port}` }, next);
+});
+app.use("/", (req, res, next) => {
+  proxy.web(req, res, { target: `http://${home.host}:${home.port}` }, next);
 });
 app.listen(8080, "0.0.0.0", () => {
   console.log("web server started on port 8080");
