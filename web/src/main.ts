@@ -1,5 +1,5 @@
 import express from "express";
-import { createProxyServer } from "http-proxy";
+import { createProxyMiddleware } from "http-proxy-middleware";
 
 const getServerInfo = (name: string, defaultPort: number) => {
   const hostEnv = process.env[`${name}-host`];
@@ -16,20 +16,32 @@ const client = getServerInfo("client", 3000);
 const deck = getServerInfo("deck", 5001);
 const word = getServerInfo("word", 5002);
 
-//set up proxy
-const proxy = createProxyServer();
-app.use("/deck", (req, res, next) => {
-  proxy.web(req, res, { target: `http://${deck.host}:${deck.port}` }, next);
-});
-app.use("/word", (req, res, next) => {
-  proxy.web(req, res, { target: `http://${word.host}:${word.port}` }, next);
-});
-app.use("/tarot", (req, res, next) => {
-  proxy.web(req, res, { target: `http://${client.host}:${client.port}` }, next);
-});
-app.use("/", (req, res, next) => {
-  proxy.web(req, res, { target: `http://${home.host}:${home.port}` }, next);
-});
+app.use(
+  "/deck",
+  createProxyMiddleware({
+    target: `http://${deck.host}:${deck.port}`,
+    pathRewrite: { "/deck": "" },
+  })
+);
+app.use(
+  "/word",
+  createProxyMiddleware({
+    target: `http://${word.host}:${word.port}`,
+    pathRewrite: { "/word": "" },
+  })
+);
+/*
+app.use(
+  "/tarot",
+  createProxyMiddleware({
+    target: `http://${client.host}:${client.port}`,
+    pathRewrite: { "/tarot": "" },
+  })
+);*/
+app.use(
+  "/",
+  createProxyMiddleware({ target: `http://${client.host}:${client.port}` })
+);
 app.listen(8080, "0.0.0.0", () => {
   console.log("web server started on port 8080");
 });

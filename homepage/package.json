@@ -1,12 +1,12 @@
 {
-  "name": "client",
+  "name": "homepage",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "webpack-dev-server --mode development --open --hot --port 3000",
+    "start-dev": "webpack-dev-server --mode development --open --hot --port 3001",
     "build": "webpack --mode production",
-    "start": "http-server dist -p 3000 -a 0.0.0.0"
+    "start": "http-server dist -p 3001 -a 0.0.0.0"
   },
   "keywords": [],
   "author": "",
