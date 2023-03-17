@@ -14,6 +14,10 @@ module.exports = {
           from: "public/style.css",
           to: "style.css",
         },
+        {
+          from: "public/img",
+          to: "img",
+        },
       ],
     }),
   ],
