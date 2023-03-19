@@ -1,3 +1,13 @@
+import axios from "axios";
+
+const getDeck = async () => {
+  const host = "localhost";
+  const port = 5000;
+  const seed = Date.now().toString();
+  const { data } = await axios(`http://${host}:${port}/deck?seed=${seed}`);
+  console.log(data);
+  return data;
+};
 const start = (images: string[]) => {
   const table = document.getElementById("table");
   if (!table) {
@@ -24,15 +34,25 @@ const start = (images: string[]) => {
     return card;
   });
   table.replaceChildren(...cards);
+  console.log("screen : ", {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  console.log(table.getBoundingClientRect());
 };
 
 const contoler = document.getElementById("control");
 if (contoler) {
   const button = document.createElement("button") as HTMLButtonElement;
   button.innerText = "start";
-  button.onclick = () => {
+  button.onclick = async () => {
     button.innerText = "refresh";
-    start(["img/img_0.jpg"]);
+    const { deck } = await getDeck();
+    start(
+      deck
+        .map((x: { num: number }) => x.num)
+        .map((i: number) => `img/img_${i}.jpg`)
+    );
   };
   contoler.replaceChildren(button);
 }

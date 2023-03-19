@@ -11,6 +11,7 @@
 
 .card {
   aspect-ratio: 7/12;
+  height: 15svh;
 }
 
 .clickable {
@@ -20,4 +21,9 @@
 .card img {
   max-width: 100%;
   min-width: 1%;
+}
+
+main {
+  height: 100svh;
+  width: 100svw;
 }
