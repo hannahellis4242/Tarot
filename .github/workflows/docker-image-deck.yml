@@ -20,5 +20,5 @@ jobs:
 
       - name: Build And Push deck Image
         run: |
-          docker build ./deck --file deck/dockerfile --tag ghcr.io/hannahellis4242/tarot/deck:latest
+          docker build ./deck --file deck/Dockerfile --tag ghcr.io/hannahellis4242/tarot/deck:latest
           docker push ghcr.io/hannahellis4242/tarot/deck:latest
