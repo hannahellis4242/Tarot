@@ -20,5 +20,5 @@ app.get("/deck", cors(), handleRequest);
 app.get("/", cors(), getHelp);
 
 app.listen(port, host, () => {
-  console.log(`listening at http://${host}:${port}`);
+  console.log(`listening on http://${host}:${port}`);
 });
