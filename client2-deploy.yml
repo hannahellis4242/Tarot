@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  deck:
+    image: ghcr.io/hannahellis4242/tarot/deck:latest
+    ports:
+      - "5000:5000"
+  client:
+    image: ghcr.io/hannahellis4242/tarot/client2:latest
+    ports:
+      - "80:8080"
