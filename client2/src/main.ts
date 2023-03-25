@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getDeck = async () => {
-  const host = "localhost";
+  const host = process.env.DECK_HOST || "localhost";
   const port = 5000;
   const seed = Date.now().toString();
   const { data } = await axios(`http://${host}:${port}/deck?seed=${seed}`);
