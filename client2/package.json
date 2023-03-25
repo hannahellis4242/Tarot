@@ -7,7 +7,7 @@
     "test": "jest",
     "build": "webpack",
     "dev": "webpack serve",
-    "start": "http-server dist -p 8080"
+    "start": "http-server dist -p 8080 --cors"
   },
   "keywords": [],
   "author": "",
